@@ -240,7 +240,8 @@ else:
     #---------------------------
     # Simulation and Excel mesh_interface
     #---------------------------
-    #from anuga.simulation.simulation import se
+    from anuga.simulation.simulation import Simulation
+
 
     #-----------------------------
     # Mesh API
@@ -267,6 +268,7 @@ else:
 
     from anuga.operators.set_elevation import Set_elevation
     from anuga.operators.set_quantity import Set_quantity
+    from anuga.operators.set_stage import Set_stage
 
     from anuga.operators.sanddune_erosion_operator import Sanddune_erosion_operator
     from anuga.operators.erosion_operators import Bed_shear_erosion_operator

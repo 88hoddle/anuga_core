@@ -182,6 +182,7 @@ def run_simulation(parallel = False, control_data = None, test_points = None, ve
                                   losses=1.5,
                                   width=5.0,
                                   #apron=5.,
+                                  barrels=1.0,
                                   use_momentum_jet=True,
                                   use_velocity_head=False,
                                   manning=0.013,

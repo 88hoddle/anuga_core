@@ -342,6 +342,7 @@ class Parallel_Boyd_pipe_operator(Parallel_Structure_operator):
             if barrel_velocity > self.max_velocity:
                 barrel_velocity = self.max_velocity
                 Q = flow_area * barrel_velocity
+                Q = Q * barrels
 
 
 
