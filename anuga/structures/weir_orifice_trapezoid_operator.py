@@ -338,13 +338,11 @@ def weir_orifice_trapezoid_function(
         dcrit = dcrit
         if dcrit > depth:
             dcrit = depth
-
             flow_area = bf*width*dcrit+0.5*(z1+z2)*dcrit**2
             perimeter= 2.0*bf*width+(z1+z2)*dcrit + (dcrit**2+(z1*dcrit)**2)**0.5 + (dcrit**2+(z2*dcrit)**2)**0.5
         else: # dcrit < depth
             flow_area = bf*width*dcrit+0.5*(z1+z2)*dcrit**2
             perimeter= bf*width + (dcrit**2+(z1*dcrit)**2)**0.5 + (dcrit**2+(z2*dcrit)**2)**0.5
-
         outlet_culvert_depth = dcrit
         case = 'Inlet unsubmerged Box Acts as Weir'
     else: # Inlet Submerged but check internal culvert flow depth
@@ -354,11 +352,9 @@ def weir_orifice_trapezoid_function(
         ic=0
         dyc=0.001
         while abs(dyc)>0.00001:
-
             Tc=bf*width+(z1+z2)*dcrit
             Pc=bf*width+((z1**2+1)**0.5+(z2**2+1)**0.5)*dcrit
             Ac=0.5*dcrit*(bf*width+Tc)
-
             Rc=Ac/Pc
             fc=Ac**1.5*Tc**-0.5-Q/(9.81**0.5)
             ffc=Ac**1.5*-0.5*Tc**-1.5*(z1+z2)+Tc**-0.5*1.5*Ac**0.5*Tc
@@ -368,13 +364,11 @@ def weir_orifice_trapezoid_function(
         dcrit = dcrit
         if dcrit > depth:
             dcrit = depth
-
             flow_area = bf*width*dcrit+0.5*(z1+z2)*dcrit**2
             perimeter= 2.0*bf*width+(z1+z2)*dcrit + (dcrit**2+(z1*dcrit)**2)**0.5 + (dcrit**2+(z2*dcrit)**2)**0.5
         else: # dcrit < depth
             flow_area = bf*width*dcrit+0.5*(z1+z2)*dcrit**2
             perimeter= bf*width + (dcrit**2+(z1*dcrit)**2)**0.5 + (dcrit**2+(z2*dcrit)**2)**0.5
-
         outlet_culvert_depth = dcrit
         case = 'Inlet submerged Box Acts as Orifice'
     # Critical Depths Calculation
@@ -382,11 +376,9 @@ def weir_orifice_trapezoid_function(
     ic=0
     dyc=0.001
     while abs(dyc)>0.00001:
-
         Tc=bf*width+(z1+z2)*dcrit
         Pc=bf*width+((z1**2+1)**0.5+(z2**2+1)**0.5)*dcrit
         Ac=0.5*dcrit*(bf*width+Tc)
-
         Rc=Ac/Pc
         fc=Ac**1.5*Tc**-0.5-Q/(9.81**0.5)
         ffc=Ac**1.5*-0.5*Tc**-1.5*(z1+z2)+Tc**-0.5*1.5*Ac**0.5*Tc
@@ -398,14 +390,12 @@ def weir_orifice_trapezoid_function(
     outlet_culvert_depth = dcrit
     if outlet_culvert_depth > depth:
         outlet_culvert_depth = depth  # Once again the pipe is flowing full not partfull
-
         flow_area = bf*width*depth+0.5*(z1+z2)*(depth)**2  # Cross sectional area of flow in the culvert
         perimeter = 2.0*bf*width+(z1+z2)*depth + ((depth)**2+(z1*(depth))**2)**0.5 + ((depth)**2+(z2*(depth))**2)**0.5
         case = 'Inlet CTRL Outlet unsubmerged PIPE PART FULL'
     else:
         flow_area = bf*width*outlet_culvert_depth+0.5*(z1+z2)*outlet_culvert_depth**2
         perimeter = 2.0*bf*width+(z1+z2)*outlet_culvert_depth + (outlet_culvert_depth**2+(z1*outlet_culvert_depth)**2)**0.5 + (outlet_culvert_depth**2+(z2*outlet_culvert_depth)**2)**0.5
-
         case = 'INLET CTRL Culvert is open channel flow we will for now assume critical depth'
     # Initial Estimate of Flow for Outlet Control using energy slope
     #( may need to include Culvert Bed Slope Comparison)
@@ -413,6 +403,7 @@ def weir_orifice_trapezoid_function(
     culvert_velocity = math.sqrt(delta_total_energy/((sum_loss/2/anuga.g) \
                                                           +(manning**2*length)/hyd_rad**1.33333))
     Q_outlet_tailwater = flow_area * culvert_velocity
+
 
     if delta_total_energy < driving_energy:
         # Calculate flows for outlet control
@@ -468,6 +459,7 @@ def weir_orifice_trapezoid_function(
                 flow_area=bf*width*outlet_culvert_depth+0.5*(z1+z2)*outlet_culvert_depth**2
                 perimeter=bf*width + (outlet_culvert_depth**2+(z1*outlet_culvert_depth)**2)**0.5 + (outlet_culvert_depth**2+(z2*outlet_culvert_depth)**2)**0.5
 
+
                 case = 'Outlet is open channel flow'
 
         hyd_rad = flow_area/perimeter
@@ -486,7 +478,6 @@ def weir_orifice_trapezoid_function(
     if  flow_area <= 0.0 :
         culv_froude = 0.0
     else:
-
         culv_froude=math.sqrt(Q**2*flow_width/(anuga.g*flow_area**3))
     # Determine momentum at the outlet
     barrel_velocity = Q/(flow_area + anuga.velocity_protection/flow_area)
